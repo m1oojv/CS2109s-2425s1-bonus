@@ -10,6 +10,7 @@ from priority_queue import PriorityQueue
 from collections import defaultdict
 
 # Return the path found
+# is_update indicates whether it updates the frontier or pushes to frontier
 def uniform_cost_search(graph, inital_node, goal_test, is_tree, is_update):
 
     # frontier = PriorityQueue('min')
