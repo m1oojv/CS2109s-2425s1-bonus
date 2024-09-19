@@ -11,7 +11,32 @@ class State:
         return len(self.children) == 0
 
 def alpha_beta_search(state, alpha=-np.infty, beta=np.infty, depth=0):
-    raise NotImplementedError
+    if state.is_terminal():
+        return state.val
+    
+    if state.is_max_player:
+        value = -np.infty
+    else: 
+        value = np.infty
+
+    for child in state.get_children():
+        eval_value = alpha_beta_search(child, alpha, beta, depth + 1)
+
+        if state.is_max_player:
+            if eval_value > value:
+                value = eval_value
+            
+            alpha = max(alpha, eval_value) 
+        else: 
+            if eval_value < value:
+                value = eval_value
+            
+            beta = min(beta, eval_value)
+            
+        if beta <= alpha:
+            break
+        
+    return value
 
 
 s = State('MAX0', True,
